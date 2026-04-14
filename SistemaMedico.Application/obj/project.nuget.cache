@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "w0y0I3rX3iA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Renzo\\Downloads\\sistemaMedico\\SistemaMedico.Application\\SistemaMedico.Application.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Renzo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\10.0.5\\microsoft.aspnetcore.cryptography.internal.10.0.5.nupkg.sha512",
+    "C:\\Users\\Renzo\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\10.0.5\\microsoft.aspnetcore.cryptography.keyderivation.10.0.5.nupkg.sha512",
+    "C:\\Users\\Renzo\\.nuget\\packages\\system.memory\\4.6.3\\system.memory.4.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}

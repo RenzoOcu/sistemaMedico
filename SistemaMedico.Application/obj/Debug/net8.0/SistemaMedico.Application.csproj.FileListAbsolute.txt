@@ -1,0 +1,15 @@
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.csproj.AssemblyReference.cache
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.AssemblyInfoInputs.cache
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.AssemblyInfo.cs
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.csproj.CoreCompileInputs.cache
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\bin\Debug\net8.0\SistemaMedico.Application.deps.json
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\bin\Debug\net8.0\SistemaMedico.Application.dll
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\bin\Debug\net8.0\SistemaMedico.Application.pdb
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\bin\Debug\net8.0\SistemaMedico.Domain.dll
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\bin\Debug\net8.0\SistemaMedico.Domain.pdb
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaM.ED792144.Up2Date
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.dll
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\refint\SistemaMedico.Application.dll
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\SistemaMedico.Application.pdb
+C:\Users\Renzo\Downloads\sistemaMedico\SistemaMedico.Application\obj\Debug\net8.0\ref\SistemaMedico.Application.dll

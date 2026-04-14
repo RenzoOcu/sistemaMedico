@@ -1,0 +1,70 @@
+@using System.Security.Claims
+@{
+    ViewData["Title"] = "Inicio";
+    Layout = "_Layout";
+    var rol = User.FindFirst(ClaimTypes.Role)?.Value;
+}
+
+<div class="text-center mt-5">
+    <h1 class="display-4">Bienvenido</h1>
+    <p class="lead">Sistema de Gestión de Citas Médicas</p>
+    
+    <hr class="my-4">
+    
+    <div class="row mt-5 justify-content-center">
+        @if (rol == "Recepcionista")
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span style="font-size: 2.5rem;">👥</span>
+                        </div>
+                        <h5 class="card-title">Gestión de Pacientes</h5>
+                        <p class="card-text">Administra el registro de pacientes de la clínica.</p>
+                        <a asp-controller="Pacientes" asp-action="Index" class="btn btn-primary mt-auto">Ir a Pacientes</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span style="font-size: 2.5rem;">📅</span>
+                        </div>
+                        <h5 class="card-title">Registrar Cita</h5>
+                        <p class="card-text">Programa nuevas citas médicas.</p>
+                        <a asp-controller="Citas" asp-action="Create" class="btn btn-primary mt-auto">Registrar Cita</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span style="font-size: 2.5rem;">📋</span>
+                        </div>
+                        <h5 class="card-title">Lista de Citas</h5>
+                        <p class="card-text">Ver todas las citas programadas.</p>
+                        <a asp-controller="Citas" asp-action="Index" class="btn btn-primary mt-auto">Ver Citas</a>
+                    </div>
+                </div>
+            </div>
+        }
+        @if (rol == "Medico")
+        {
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                        <div class="mb-3">
+                            <span style="font-size: 3rem;">📋</span>
+                        </div>
+                        <h5 class="card-title">Mis Citas</h5>
+                        <p class="card-text">Consulta tus citas programadas, busca por fecha o estado, y revisa la información de tus pacientes.</p>
+                        <a asp-controller="Citas" asp-action="MisCitas" class="btn btn-primary mt-auto">Ver Mis Citas</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

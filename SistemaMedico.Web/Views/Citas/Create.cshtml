@@ -1,0 +1,128 @@
+@model SistemaMedico.Application.DTOs.CitaCreateDto
+@{
+    ViewData["Title"] = "Nueva Cita";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-calendar-plus me-1"></i> Registrar Nueva Cita</h5>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">✗ @ViewBag.Error</div>
+                }
+
+                <form method="post" asp-controller="Citas" asp-action="Create" class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Paciente <span class="text-danger">*</span></label>
+                        <select class="form-select" name="IdPaciente" id="IdPaciente" required onchange="cargarEspecialidad()">
+                            <option value="">Seleccionar...</option>
+                            @foreach (var paciente in ViewBag.Pacientes)
+                            {
+                                <option value="@paciente.IdPaciente">@paciente.Apellidos, @paciente.Nombres (@paciente.NumeroDocumento)</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Médico <span class="text-danger">*</span></label>
+                        <select class="form-select" name="IdMedico" id="IdMedico" required onchange="cargarHorarios()">
+                            <option value="">Seleccionar...</option>
+                            @foreach (var medico in ViewBag.Medicos)
+                            {
+                                <option value="@medico.IdMedico">@medico.Nombre - @medico.Especialidad</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Fecha <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" name="Fecha" id="Fecha" required onchange="cargarHorarios()">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Hora <span class="text-danger">*</span></label>
+                        <select class="form-select" name="Hora" id="Hora" required disabled>
+                            <option value="">Seleccionar...</option>
+                        </select>
+                        <small class="text-muted d-block" id="horarioInfo">Seleccione médico y fecha</small>
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Motivo <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="Motivo" required placeholder="Ingrese el motivo">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Observaciones</label>
+                        <textarea class="form-control" name="Observaciones" rows="2" placeholder="Opcional"></textarea>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Registrar
+                            </button>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times me-1"></i> Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementById('Fecha').setAttribute('min', today);
+        });
+
+        function cargarHorarios() {
+            var idMedico = document.getElementById('IdMedico').value;
+            var fecha = document.getElementById('Fecha').value;
+            var horaSelect = document.getElementById('Hora');
+            var horarioInfo = document.getElementById('horarioInfo');
+            
+            if (!idMedico || !fecha) return;
+
+            horaSelect.disabled = true;
+            horaSelect.innerHTML = '<option value="">Cargando...</option>';
+            horarioInfo.textContent = 'Cargando horarios...';
+
+            fetch(`/Citas/GetHorariosDisponibles?idMedico=${idMedico}&fecha=${fecha}`)
+                .then(response => response.json())
+                .then(data => {
+                    horaSelect.disabled = false;
+                    horaSelect.innerHTML = '<option value="">Seleccionar horario...</option>';
+                    
+                    if (data.length === 0) {
+                        horaSelect.innerHTML = '<option value="">No hay horarios disponibles</option>';
+                        horarioInfo.textContent = 'No hay horarios disponibles para esta fecha';
+                        return;
+                    }
+                    
+                    data.forEach(function(horario) {
+                        var option = document.createElement('option');
+                        option.value = horario;
+                        option.textContent = horario;
+                        horaSelect.appendChild(option);
+                    });
+                    horarioInfo.textContent = `${data.length} horarios disponibles`;
+                })
+                .catch(error => {
+                    horaSelect.innerHTML = '<option value="">Error al cargar</option>';
+                    horarioInfo.textContent = 'Error al cargar horarios';
+                });
+        }
+
+        function cargarEspecialidad() {
+            // Reserved for future functionality
+        }
+    </script>
+}

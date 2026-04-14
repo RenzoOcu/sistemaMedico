@@ -1,0 +1,435 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+    @@keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    @@keyframes glow {
+        0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6); }
+    }
+    
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .login-wrapper {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000000;
+        padding: 2rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .login-wrapper::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255, 215, 0, 0.03) 0%, transparent 50%);
+        animation: rotate 20s linear infinite;
+    }
+    
+    @@keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+    
+    [data-theme="light"] .login-wrapper {
+        background: #ffffff;
+    }
+    
+    [data-theme="light"] .login-wrapper::before {
+        display: none;
+    }
+    
+    .login-card {
+        max-width: 420px;
+        width: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
+        border: 2px solid #FFD700;
+        background-color: #111111;
+        position: relative;
+        animation: glow 3s ease-in-out infinite, fadeIn 0.5s ease-out;
+    }
+    
+    [data-theme="light"] .login-card {
+        background-color: #ffffff;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    
+    .login-card .card-header {
+        background: linear-gradient(135deg, #000000, #111111);
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+        border: none;
+    }
+    
+    [data-theme="light"] .login-card .card-header {
+        background: linear-gradient(135deg, #1a1a1a, #333333);
+    }
+    
+    .login-icon {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        display: block;
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    .login-card .card-header h4 {
+        margin: 0;
+        font-size: 1.4rem;
+        color: #FFD700;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+    
+    .login-card .card-header .subtitle {
+        color: #888888;
+        font-size: 0.85rem;
+        margin-top: 0.5rem;
+    }
+    
+    [data-theme="light"] .login-card .card-header .subtitle {
+        color: #aaaaaa;
+    }
+    
+    .login-card .card-body {
+        padding: 2.5rem 2rem;
+        background-color: #111111;
+    }
+    
+    [data-theme="light"] .login-card .card-body {
+        background-color: #ffffff;
+    }
+    
+    .login-card .welcome-text {
+        text-align: center;
+        color: #FFD700;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+    
+    .login-card .card-title {
+        text-align: center;
+        color: #888888;
+        font-size: 0.9rem;
+        margin-bottom: 2rem;
+    }
+    
+    [data-theme="light"] .login-card .card-title {
+        color: #666666;
+    }
+    
+    .input-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+    
+    .input-group i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #FFD700;
+        font-size: 1.1rem;
+        z-index: 10;
+    }
+    
+    .login-card .form-control {
+        background-color: #000000;
+        border: 2px solid #333333;
+        color: #ffffff;
+        padding: 0.875rem 1rem 0.875rem 2.75rem;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    [data-theme="light"] .login-card .form-control {
+        background-color: #f5f5f5;
+        border: 2px solid #ddd;
+        color: #1a1a1a;
+    }
+    
+    .login-card .form-control:focus {
+        border-color: #FFD700;
+        box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.15);
+        background-color: #000000;
+        color: #ffffff;
+        outline: none;
+    }
+    
+    [data-theme="light"] .login-card .form-control:focus {
+        background-color: #ffffff;
+        color: #1a1a1a;
+    }
+    
+    .login-card .form-control::placeholder {
+        color: #666666;
+    }
+    
+    [data-theme="light"] .login-card .form-control::placeholder {
+        color: #999999;
+    }
+    
+    .login-card .form-label {
+        color: #FFD700;
+        font-weight: 600;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    
+    .login-card .btn-primary {
+        background: linear-gradient(135deg, #FFD700 0%, #E5C100 50%, #FFD700 100%);
+        border: none;
+        color: #000000;
+        font-weight: 700;
+        padding: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .login-card .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .login-card .btn-primary:hover::before {
+        left: 100%;
+    }
+    
+    .login-card .btn-primary:hover {
+        background: linear-gradient(135deg, #E5C100 0%, #FFD700 50%, #E5C100 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+    
+    .login-card .btn-primary:active {
+        transform: translateY(0);
+    }
+    
+    .divider {
+        display: flex;
+        align-items: center;
+        margin: 1.5rem 0;
+    }
+    
+    .divider::before, .divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #333333, transparent);
+    }
+    
+    [data-theme="light"] .divider::before, 
+    [data-theme="light"] .divider::after {
+        background: linear-gradient(90deg, transparent, #ddd, transparent);
+    }
+    
+    .divider span {
+        padding: 0 1rem;
+        color: #666666;
+        font-size: 0.8rem;
+    }
+    
+    .login-info {
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.05));
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        border: 1px solid rgba(255, 215, 0, 0.3);
+        text-align: center;
+    }
+    
+    .login-info small {
+        display: block;
+        color: #888888;
+        line-height: 1.8;
+    }
+    
+    [data-theme="light"] .login-info small {
+        color: #555555;
+    }
+    
+    .login-info strong {
+        color: #FFD700;
+    }
+    
+    .version {
+        text-align: center;
+        color: #444444;
+        font-size: 0.7rem;
+        margin-top: 1rem;
+    }
+    
+    [data-theme="light"] .version {
+        color: #999999;
+    }
+    
+    .theme-toggle {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #FFD700, #E5C100);
+        border: 3px solid #000000;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .theme-toggle:hover {
+        transform: scale(1.1) rotate(15deg);
+    }
+</style>
+
+<div class="login-wrapper">
+    <div class="login-card card">
+        <div class="card-header">
+            <span class="login-icon"><i class="fas fa-hospital-user"></i></span>
+            <h4 class="mb-0">SISTEMA MÉDICO</h4>
+            <p class="subtitle">Gestión de Citas Médicas</p>
+        </div>
+        <div class="card-body">
+            <p class="welcome-text">Bienvenido</p>
+            <h5 class="card-title">Ingrese sus credenciales para continuar</h5>
+            
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">⚠️ @ViewBag.Error</div>
+            }
+
+            <form method="post" asp-controller="Account" asp-action="Login" id="loginForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Usuario</label>
+                    <div class="input-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" class="form-control" id="username" name="username" required placeholder="Ingrese su usuario">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" class="form-control" id="password" name="password" required placeholder="Ingrese su contraseña">
+                    </div>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg click-sound">🔐 INGRESAR AL SISTEMA</button>
+                </div>
+            </form>
+
+            <div class="divider">
+                <span>INFO</span>
+            </div>
+
+            <div class="login-info">
+                <small class="mb-2"><strong>Credenciales de acceso:</strong></small>
+                <small>📋 Recepción: <strong>recepcionista</strong> / <strong>recep123</strong></small>
+                <small>👨‍⚕️ Médico: <strong>doctor</strong> / <strong>med123</strong></small>
+            </div>
+            
+            <p class="version">v1.0.0 | Sistema de Citas Médicas</p>
+        </div>
+    </div>
+</div>
+
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme(); playClickSound()" title="Cambiar tema">
+    <span class="theme-icon">☀️</span>
+</button>
+
+<script>
+    function playClickSound() {
+        try {
+            var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            var oscillator = audioCtx.createOscillator();
+            var gainNode = audioCtx.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.1);
+        } catch(e) {}
+    }
+    
+    function toggleTheme() {
+        const html = document.documentElement;
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        const icon = document.querySelector('.theme-icon');
+        if (icon) {
+            icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+    
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        const icon = document.querySelector('.theme-icon');
+        if (icon) {
+            icon.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        initTheme();
+        
+        document.querySelectorAll('.click-sound, .btn, button[type="submit"], a.nav-link').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                playClickSound();
+            });
+        });
+    });
+</script>

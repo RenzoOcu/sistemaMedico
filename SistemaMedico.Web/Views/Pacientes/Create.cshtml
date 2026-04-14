@@ -1,0 +1,89 @@
+@model SistemaMedico.Application.DTOs.PacienteDto
+@{
+    ViewData["Title"] = "Nuevo Paciente";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-user-plus me-1"></i> Registro de Nuevo Paciente</h5>
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger">✗ @ViewBag.Error</div>
+                }
+
+                <form method="post" asp-controller="Pacientes" asp-action="Create" class="row g-3">
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Tipo Documento <span class="text-danger">*</span></label>
+                        <select class="form-select" name="TipoDocumento" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Carnet Extranjeria">Carnet de Extranjería</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Número Documento <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="NumeroDocumento" required placeholder="Nro. documento">
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Nombres <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="Nombres" required placeholder="Nombres">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Apellidos <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="Apellidos" required placeholder="Apellidos">
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Fecha Nac. <span class="text-danger">*</span></label>
+                        <input type="date" class="form-control" name="FechaNacimiento" required>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Sexo <span class="text-danger">*</span></label>
+                        <select class="form-select" name="Sexo" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Teléfono <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" name="Telefono" required placeholder="Teléfono">
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label">Correo <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" name="Email" required placeholder="correo@ejemplo.com">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Dirección</label>
+                        <input type="text" class="form-control" name="Direccion" placeholder="Opcional">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Observaciones</label>
+                        <textarea class="form-control" name="Observaciones" rows="2" placeholder="Opcional"></textarea>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="d-flex flex-column flex-sm-row gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Registrar
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-times me-1"></i> Cancelar
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

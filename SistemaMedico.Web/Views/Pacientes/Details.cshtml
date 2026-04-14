@@ -1,0 +1,59 @@
+@model SistemaMedico.Application.DTOs.PacienteDto
+@{
+    ViewData["Title"] = "Detalles del Paciente";
+    Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">👤 Datos del Paciente</h5>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-md-4">Tipo Documento:</dt>
+                    <dd class="col-md-8"><span class="badge bg-secondary">@Model.TipoDocumento</span></dd>
+
+                    <dt class="col-md-4">Número Documento:</dt>
+                    <dd class="col-md-8"><strong>@Model.NumeroDocumento</strong></dd>
+
+                    <dt class="col-md-4">Nombres:</dt>
+                    <dd class="col-md-8">@Model.Nombres</dd>
+
+                    <dt class="col-md-4">Apellidos:</dt>
+                    <dd class="col-md-8">@Model.Apellidos</dd>
+
+                    <dt class="col-md-4">Fecha de Nacimiento:</dt>
+                    <dd class="col-md-8">@Model.FechaNacimiento.ToString("dd/MM/yyyy")</dd>
+
+                    <dt class="col-md-4">Sexo:</dt>
+                    <dd class="col-md-8">@Model.Sexo</dd>
+
+                    <dt class="col-md-4">Teléfono:</dt>
+                    <dd class="col-md-8">@Model.Telefono</dd>
+
+                    <dt class="col-md-4">Correo Electrónico:</dt>
+                    <dd class="col-md-8">@Model.Email</dd>
+
+                    @if (!string.IsNullOrEmpty(Model.Direccion))
+                    {
+                        <dt class="col-md-4">Dirección:</dt>
+                        <dd class="col-md-8">@Model.Direccion</dd>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.Observaciones))
+                    {
+                        <dt class="col-md-4">Observaciones:</dt>
+                        <dd class="col-md-8">@Model.Observaciones</dd>
+                    }
+                </dl>
+
+                <div class="d-flex gap-2 mt-4">
+                    <a asp-action="Edit" asp-route-id="@Model.IdPaciente" class="btn btn-warning">✏️ Editar</a>
+                    <a asp-action="Index" class="btn btn-secondary">⬅️ Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
