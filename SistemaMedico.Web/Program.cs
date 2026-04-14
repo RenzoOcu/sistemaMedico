@@ -8,7 +8,17 @@ using SistemaMedico.Infrastructure.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+{
+    var conn = builder.Configuration.GetConnectionString("DefaultConnection") ?? "Data Source=sistema.db";
+    if (conn.Contains(".db") || conn.Contains("Data Source=") || conn.Contains(" SQLite"))
+    {
+        options.UseSqlite(conn);
+    }
+    else
+    {
+        options.UseSqlServer(conn);
+    }
+});
 
 builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
 builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
